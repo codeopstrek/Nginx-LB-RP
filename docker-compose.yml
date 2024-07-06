@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+  nginx:
+    image: codeopstrek/custom-nginx
+    container_name: CustomNginx
+    ports:
+      - "8080:8080"
+      - "443:443"
+    networks:
+      - app_network
+
+  app1:
+    image: codeopstrek/app1
+    container_name: FirstApplicationContainer
+    networks:
+      - app_network
+
+  app2-instance1:
+    image: codeopstrek/app2-instance1
+    container_name: SecondApplicationContainer1
+    networks:
+      - app_network
+
+  app2-instance2:
+    image: codeopstrek/app2-instance2
+    container_name: SecondApplicationContainer2
+    networks:
+      - app_network
+
+networks:
+  app_network:
+    driver: bridge
